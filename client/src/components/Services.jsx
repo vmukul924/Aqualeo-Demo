@@ -23,7 +23,7 @@ export default function Services() {
 
         {status === "error" && (
           <p className="notice">
-            Backend se services load nahi ho payi — check karo ki server chal raha hai
+            The services could not be loaded from the backend
             (<code>cd server &amp;&amp; npm start</code>).
           </p>
         )}
