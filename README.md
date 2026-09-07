@@ -14,26 +14,7 @@ aqualeo-demo/
 
 ## Run karne ka tarika
 
-### Option A (Windows) — Double-click se dono terminal apne aap khul jaayein
-Pehli baar dependencies install karo (ek hi baar karna hai):
-```bash
-npm install
-npm run install:all
-```
-Uske baad `start.bat` file par **double-click** karo — 2 alag CMD windows apne aap khul jaayengi,
-ek SERVER (port 5000) chalayegi, dusri CLIENT (port 5173).
-
-### Option B — Ek hi terminal se dono (concurrently)
-Root folder (`aqualeo-demo/`) ke andar:
-```bash
-npm install
-npm run install:all
-npm run dev
-```
-Ye `concurrently` use karke backend (port 5000) aur frontend (port 5173) dono ek saath, ek hi terminal mein chala dega — colored logs ke saath (SERVER = blue, CLIENT = green).
-
-### Option C — Do alag terminal manually
-**Terminal 1 (backend):**
+### 1. Backend start karo
 ```bash
 cd server
 npm install
@@ -41,7 +22,7 @@ npm start
 ```
 Backend chalega: `http://localhost:5000`
 
-**Terminal 2 (frontend):**
+### 2. Frontend start karo (naye terminal mein)
 ```bash
 cd client
 npm install

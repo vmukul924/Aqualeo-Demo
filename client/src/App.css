@@ -1,12 +1,12 @@
 :root {
-  --navy: #0f2942;
-  --navy-deep: #0a1c2e;
-  --teal: #0f766e;
-  --teal-light: #14b8a6;
-  --paper: #f7f8fa;
-  --ink: #16232f;
-  --ink-soft: #52616f;
-  --border: #e2e6ea;
+  --navy: #1c1730;
+  --navy-deep: #120e21;
+  --teal: #c9822f;
+  --teal-light: #e2a35a;
+  --paper: #f8f6f3;
+  --ink: #201c2c;
+  --ink-soft: #5c5668;
+  --border: #e6e2ea;
   --white: #ffffff;
   --radius: 10px;
 }
@@ -91,6 +91,80 @@ a {
 
 .nav-links a:hover {
   color: var(--navy);
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Hamburger button - hidden on desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--navy);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.hamburger.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile dropdown menu */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  max-height: 0;
+  overflow: hidden;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  transition: max-height 0.3s ease;
+}
+
+.mobile-menu.is-open {
+  max-height: 480px;
+}
+
+.mobile-menu a {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.mobile-menu a:hover {
+  color: var(--teal);
+}
+
+.mobile-menu .mobile-cta {
+  margin: 16px 24px;
+  text-align: center;
+  border-bottom: none;
 }
 
 .btn {
@@ -215,7 +289,7 @@ a {
   display: inline-block;
   font-size: 0.75rem;
   color: var(--teal);
-  background: #e6f4f2;
+  background: #f5e8d6;
   padding: 4px 10px;
   border-radius: 999px;
   margin-bottom: 12px;
@@ -382,6 +456,15 @@ a {
   }
   .nav-links {
     display: none;
+  }
+  .navbar-actions .btn-primary {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .mobile-menu {
+    display: flex;
   }
   .footer-inner {
     grid-template-columns: 1fr;

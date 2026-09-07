@@ -8,10 +8,7 @@ const testimonialsRouter = require("./routes/testimonials");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Set FRONTEND_URL env var on Render (e.g. https://your-frontend.onrender.com)
-// to restrict CORS in production. Falls back to allowing all origins for local dev.
-const allowedOrigin = process.env.FRONTEND_URL || "*";
-app.use(cors({ origin: allowedOrigin }));
+app.use(cors());
 app.use(express.json());
 
 // NOTE: No database is connected here on purpose (demo without DB).
