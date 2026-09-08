@@ -53,15 +53,30 @@ Frontend chalega: `http://localhost:5173`
 
 Frontend backend se services list aur contact form submit — dono `http://localhost:5000/api/...` par call karta hai.
 
+## Ab ye ek asli multi-page site hai (single static page nahi)
+
+`react-router-dom` add kiya gaya hai. Ye alag routes hain:
+
+- `/` — Home (Hero, Trust/About, Services, Testimonials, Insights teaser, FAQ, Contact)
+- `/insights` — Poori Insights listing, category filter ke saath (Company Formation, Trademark & IP, Licensing, Digital, Compliance)
+- `/insights/:slug` — Har article ka apna detail page, backend se `GET /api/insights/:slug` se aata hai
+- `/careers` — Open positions list (department filter ke saath) + "Apply" button jo modal form kholta hai
+- `/careers` apply modal → `POST /api/careers/apply` par submit hota hai
+- `*` (koi bhi galat URL) — 404 page
+
+Navbar aur Footer ke "Insights" aur "Careers" links pehle sirf same-page anchors the (Careers ka to
+section hi nahi tha), isiliye wo "open" nahi ho rahe the. Ab dono proper routed pages hain.
+
 ## Kya included hai
 
 - Fully responsive layout — mobile hamburger menu (slide-in drawer), fluid font sizes, stacking grids/forms on
   small screens, touch-friendly buttons (breakpoints at 1024px / 860px / 640px / 480px)
 - Hero section + stats
-- Trust/credentials badges
+- Trust/credentials badges (id="about" — navbar ka "About us" link ab yahi scroll karta hai)
 - Services grid (Trademark, Company Formation, Licensing, IT, Digital, E-commerce)
 - Client testimonials
-- Insights/blog cards
+- Insights: home page par teaser + poora `/insights` listing page + per-article `/insights/:slug` page
+- Careers: `/careers` page — perks, department-filtered job list, aur apply modal jo backend ko submit karta hai
 - FAQ accordion
 - Contact form (Name, Email, Phone*, Company*, Message) → POST `/api/contact`
   - Server-side validation (name length, email format, message length)
@@ -69,8 +84,19 @@ Frontend backend se services list aur contact form submit — dono `http://local
   - **Persisted to disk** at `server/data/submissions.json` — survives server restarts
   - GET `/api/contact` lists all saved submissions (demo/admin view)
 - Services list frontend par GET `/api/services` se aata hai (mock JSON array, backend ke andar)
+- Insights list/detail `GET /api/insights` aur `GET /api/insights/:slug` se aata hai
+- Careers list `GET /api/careers/jobs`, applications `POST /api/careers/apply` se **persist** hoti hain
+  `server/data/applications.json` mein (GET `/api/careers/applications` se dekh sakte ho)
 - `GET /api/health` — uptime/health check endpoint
 - Centralized 404 + error handling middleware, request logging
+
+## Production deploy karte waqt (SPA routing)
+
+Kyunki ab client-side routing hai, agar `client` ko static hosting (Render Static Site, Netlify, Vercel, etc.)
+par deploy karo to un sab platforms mein ek **SPA fallback / rewrite rule** set karna padega:
+saari unmatched routes (`/insights`, `/careers`, etc.) ko `index.html` par serve karo, warna direct URL
+open karne ya refresh karne par 404 aayega. `npm run dev` aur `vite preview` mein ye already automatically
+handle hota hai.
 
 ## Backend "properly" kaise kaam karta hai (bina external DB ke)
 

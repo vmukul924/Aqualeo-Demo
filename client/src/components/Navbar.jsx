@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const links = [
-  { href: "#services", label: "Services" },
-  { href: "#about", label: "About us" },
-  { href: "#insights", label: "Insights" },
-  { href: "#careers", label: "Careers" },
+  { to: "/#services", label: "Services" },
+  { to: "/#about", label: "About us" },
+  { to: "/insights", label: "Insights" },
+  { to: "/careers", label: "Careers" },
 ];
 
 export default function Navbar() {
@@ -34,24 +35,24 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <div className="container navbar-inner">
-        <a href="#" className="brand" onClick={closeMenu}>
+        <Link to="/" className="brand" onClick={closeMenu}>
           AquaLeo Digital
-        </a>
+        </Link>
 
         <nav className={`nav-links ${open ? "nav-open" : ""}`}>
           {links.map((l) => (
-            <a key={l.href} href={l.href} onClick={closeMenu}>
+            <Link key={l.to} to={l.to} onClick={closeMenu}>
               {l.label}
-            </a>
+            </Link>
           ))}
-          <a href="#contact" className="btn btn-primary nav-cta-mobile" onClick={closeMenu}>
+          <Link to="/#contact" className="btn btn-primary nav-cta-mobile" onClick={closeMenu}>
             Get Started
-          </a>
+          </Link>
         </nav>
 
-        <a href="#contact" className="btn btn-primary nav-cta-desktop">
+        <Link to="/#contact" className="btn btn-primary nav-cta-desktop">
           Get Started
-        </a>
+        </Link>
 
         <button
           className={`nav-toggle ${open ? "active" : ""}`}

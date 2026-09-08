@@ -1,24 +1,25 @@
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
-import Hero from "./components/Hero.jsx";
-import Trust from "./components/Trust.jsx";
-import Services from "./components/Services.jsx";
-import Testimonials from "./components/Testimonials.jsx";
-import Insights from "./components/Insights.jsx";
-import FAQ from "./components/FAQ.jsx";
-import ContactForm from "./components/ContactForm.jsx";
 import Footer from "./components/Footer.jsx";
+import ScrollToHash from "./ScrollToHash.jsx";
+import Home from "./pages/Home.jsx";
+import InsightsPage from "./pages/InsightsPage.jsx";
+import InsightArticle from "./pages/InsightArticle.jsx";
+import CareersPage from "./pages/CareersPage.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 export default function App() {
   return (
     <div className="page">
+      <ScrollToHash />
       <Navbar />
-      <Hero />
-      <Trust />
-      <Services />
-      <Testimonials />
-      <Insights />
-      <FAQ />
-      <ContactForm />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/insights" element={<InsightsPage />} />
+        <Route path="/insights/:slug" element={<InsightArticle />} />
+        <Route path="/careers" element={<CareersPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
       <Footer />
     </div>
   );

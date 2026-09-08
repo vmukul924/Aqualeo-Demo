@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   return (
     <footer className="footer">
@@ -7,12 +9,12 @@ export default function Footer() {
           <p>Global business consultancy helping entrepreneurs register companies, protect IP, and scale across 50+ countries.</p>
         </div>
         <div>
-          <h4>Services</h4>
+          <h4>Company</h4>
           <ul>
-            <li>Trademark Management</li>
-            <li>Company Formation</li>
-            <li>Business Licensing</li>
-            <li>IT Solutions</li>
+            <li><Link to="/#services">Services</Link></li>
+            <li><Link to="/#about">About us</Link></li>
+            <li><Link to="/insights">Insights</Link></li>
+            <li><Link to="/careers">Careers</Link></li>
           </ul>
         </div>
         <div>
@@ -21,7 +23,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="container">
-        <p className="copyright">© 2026 AquaLeo Digital — demo project (no DB connected).</p>
+        <p className="copyright">© 2026 AquaLeo Digital — demo project (no external DB connected).</p>
       </div>
     </footer>
   );
