@@ -1,9 +1,11 @@
 import { useState } from "react";
 
-const API_BASE = "http://localhost:5000";
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+const initialForm = { name: "", email: "", phone: "", company: "", message: "" };
 
 export default function ContactForm() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -22,14 +24,14 @@ export default function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
 
       if (!res.ok) {
         throw new Error(data.error || "Something went wrong");
       }
 
       setStatus("sent");
-      setForm({ name: "", email: "", message: "" });
+      setForm(initialForm);
     } catch (err) {
       setStatus("error");
       setErrorMsg(err.message);
@@ -42,27 +44,55 @@ export default function ContactForm() {
         <h2>Get in touch</h2>
         <p>Ready to start your global expansion? Connect with our team for a free consultation.</p>
 
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <label>
-            Name
-            <input
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Email
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              required
-            />
-          </label>
+        <form className="contact-form" onSubmit={handleSubmit} noValidate>
+          <div className="form-row">
+            <label>
+              Name
+              <input
+                type="text"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                autoComplete="name"
+                required
+              />
+            </label>
+            <label>
+              Email
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                autoComplete="email"
+                required
+              />
+            </label>
+          </div>
+
+          <div className="form-row">
+            <label>
+              Phone <span className="optional">(optional)</span>
+              <input
+                type="tel"
+                name="phone"
+                value={form.phone}
+                onChange={handleChange}
+                autoComplete="tel"
+              />
+            </label>
+            <label>
+              Company <span className="optional">(optional)</span>
+              <input
+                type="text"
+                name="company"
+                value={form.company}
+                onChange={handleChange}
+                autoComplete="organization"
+              />
+            </label>
+          </div>
+
           <label>
             Message
             <textarea

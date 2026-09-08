@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 
 const links = [
-  { href: "#top", label: "Home" },
   { href: "#services", label: "Services" },
   { href: "#about", label: "About us" },
   { href: "#insights", label: "Insights" },
-  { href: "#contact", label: "Contact us" },
+  { href: "#careers", label: "Careers" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
-  // Close the mobile menu automatically if the window is resized back to desktop
+  // close mobile menu automatically if viewport is resized back to desktop
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth > 860) setOpen(false);
@@ -20,55 +19,53 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  function handleLinkClick() {
+  // lock background scroll while mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  function closeMenu() {
     setOpen(false);
   }
 
   return (
-    <header className="navbar" id="top">
+    <header className="navbar">
       <div className="container navbar-inner">
-        <a href="#top" className="brand" onClick={handleLinkClick}>
+        <a href="#" className="brand" onClick={closeMenu}>
           AquaLeo Digital
         </a>
 
-        <nav className="nav-links">
-          {links
-            .filter((l) => l.href !== "#top")
-            .map((l) => (
-              <a key={l.href} href={l.href}>
-                {l.label}
-              </a>
-            ))}
-        </nav>
-
-        <div className="navbar-actions">
-          <a href="#contact" className="btn btn-primary">
+        <nav className={`nav-links ${open ? "nav-open" : ""}`}>
+          {links.map((l) => (
+            <a key={l.href} href={l.href} onClick={closeMenu}>
+              {l.label}
+            </a>
+          ))}
+          <a href="#contact" className="btn btn-primary nav-cta-mobile" onClick={closeMenu}>
             Get Started
           </a>
+        </nav>
 
-          <button
-            className={`hamburger${open ? " is-open" : ""}`}
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-        </div>
-      </div>
-
-      <nav className={`mobile-menu${open ? " is-open" : ""}`}>
-        {links.map((l) => (
-          <a key={l.href} href={l.href} onClick={handleLinkClick}>
-            {l.label}
-          </a>
-        ))}
-        <a href="#contact" className="btn btn-primary mobile-cta" onClick={handleLinkClick}>
+        <a href="#contact" className="btn btn-primary nav-cta-desktop">
           Get Started
         </a>
-      </nav>
+
+        <button
+          className={`nav-toggle ${open ? "active" : ""}`}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          onClick={() => setOpen((o) => !o)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      {open && <div className="nav-backdrop" onClick={closeMenu} aria-hidden="true"></div>}
     </header>
   );
 }

@@ -19,7 +19,7 @@ const credentials = [
 
 export default function Trust() {
   return (
-    <section className="section trust" id="about">
+    <section className="section trust">
       <div className="container">
         <h2>Recognized and certified</h2>
         <div className="grid grid-4">
