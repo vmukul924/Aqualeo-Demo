@@ -344,6 +344,12 @@ img {
   overflow: hidden;
 }
 
+.hero-controls {
+  display: flex;
+  align-items: center;
+  margin-top: clamp(28px, 5vw, 44px);
+}
+
 .hero-arrow {
   position: absolute;
   top: 50%;
@@ -360,6 +366,7 @@ img {
   cursor: pointer;
   z-index: 20;
   transition: background 0.15s ease;
+  flex-shrink: 0;
 }
 
 .hero-arrow:hover {
@@ -378,7 +385,6 @@ img {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: clamp(28px, 5vw, 44px);
 }
 
 .hero-dot {
@@ -699,10 +705,6 @@ img {
     display: flex;
   }
 
-  .nav-cta-desktop {
-    display: none;
-  }
-
   .nav-links {
     position: fixed;
     top: 106px;
@@ -768,6 +770,10 @@ img {
     width: 110px;
   }
 
+  .navbar-actions {
+    gap: 10px;
+  }
+
   .footer-inner {
     grid-template-columns: 1fr;
   }
@@ -779,6 +785,13 @@ img {
   .hero-arrow {
     width: 36px;
     height: 36px;
+    position: static;
+    transform: none;
+  }
+
+  .hero-controls {
+    justify-content: center;
+    gap: 14px;
   }
 }
 
@@ -835,7 +848,9 @@ img {
   }
 
   .navbar .btn.nav-cta-desktop {
-    display: none;
+    width: auto;
+    padding: 8px 16px;
+    font-size: 0.85rem;
   }
 }
 
