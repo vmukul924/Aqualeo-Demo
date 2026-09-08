@@ -111,7 +111,7 @@ export default function ContactForm() {
           {status === "sent" && <p className="form-success">Thanks! We'll get back to you soon.</p>}
           {status === "error" && (
             <p className="form-error">
-              {errorMsg || "Couldn't reach the server."} Check ki backend chal raha hai (
+              {errorMsg || "Couldn't reach the server."}  (
               <code>cd server &amp;&amp; npm start</code>).
             </p>
           )}
