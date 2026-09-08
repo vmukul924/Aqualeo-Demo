@@ -119,6 +119,10 @@ export default function Navbar() {
           <Link to="/insights" onClick={closeMenu}>
             Insights
           </Link>
+
+          <Link to="/#contact" className="btn btn-primary nav-cta-mobile" onClick={closeMenu}>
+            Get Started
+          </Link>
         </nav>
 
         <div className="navbar-actions">
