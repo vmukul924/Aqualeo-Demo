@@ -53,26 +53,7 @@ export default function Hero() {
 
   return (
     <section className="hero">
-      <button
-        type="button"
-        className="hero-arrow hero-arrow-prev"
-        aria-label="Previous slide"
-        onClick={() => restartAutoplay(prev)}
-      >
-        <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
-          <path d="M9 1L2 8l7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </button>
-      <button
-        type="button"
-        className="hero-arrow hero-arrow-next"
-        aria-label="Next slide"
-        onClick={() => restartAutoplay(next)}
-      >
-        <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
-          <path d="M1 1l7 7-7 7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </button>
+      <div className="hero-bg" aria-hidden="true"></div>
 
       <div className="container hero-inner">
         <p className="eyebrow-plain">{slide.eyebrow}</p>
@@ -101,16 +82,40 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="hero-dots">
-          {slides.map((s, i) => (
-            <button
-              key={s.title}
-              type="button"
-              className={`hero-dot ${i === index ? "active" : ""}`}
-              aria-label={`Go to slide ${i + 1}`}
-              onClick={() => restartAutoplay(() => goTo(i))}
-            />
-          ))}
+        <div className="hero-nav">
+          <button
+            type="button"
+            className="hero-arrow"
+            aria-label="Previous slide"
+            onClick={() => restartAutoplay(prev)}
+          >
+            <svg width="9" height="14" viewBox="0 0 9 14" fill="none">
+              <path d="M8 1L2 7l6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+
+          <div className="hero-dots">
+            {slides.map((s, i) => (
+              <button
+                key={s.title}
+                type="button"
+                className={`hero-dot ${i === index ? "active" : ""}`}
+                aria-label={`Go to slide ${i + 1}`}
+                onClick={() => restartAutoplay(() => goTo(i))}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            className="hero-arrow"
+            aria-label="Next slide"
+            onClick={() => restartAutoplay(next)}
+          >
+            <svg width="9" height="14" viewBox="0 0 9 14" fill="none">
+              <path d="M1 1l6 6-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
         </div>
       </div>
     </section>
